@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday 💖</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        font-family: 'Segoe UI', sans-serif;
+        overflow: hidden;
+    }
+
+    /* Background image */
+    .bg {
+        position: fixed;
+        inset: 0;
+        background: url("Bg.png") center/cover no-repeat;
+        opacity: 0.45;
+        z-index: -2;
+    }
+
+    /* Color overlay(bg colour aur texts ka colour) */
+    .overlay {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        opacity: 0.6;
+        z-index: -1;
+    }
+
+    .wrapper {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .card {
+        background: rgba(255,255,255,0.25);
+        backdrop-filter: blur(12px);
+        padding: 40px 30px;
+        border-radius: 22px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+        animation: popIn 1s ease forwards;
+        max-width: 380px;
+    }
+
+    h1 {
+        font-size: 44px;
+        color: #f78989;
+        margin: 0;
+    }
+
+    h2 {
+        font-size: 28px;
+        color: #f78989;
+        margin: 10px 0;
+        letter-spacing: 2px;
+    }
+
+    .emoji {
+        font-size: 70px;
+        margin: 20px 0;
+        animation: bounce 1.5s infinite;
+    }
+
+    p {
+        color: #f78989;
+        font-size: 18px;
+        line-height: 1.6;
+    }
+
+    /* Buttons(do button jo niche add kiya hai ) */
+    .feedback-btn {
+        margin-top: 22px;
+        padding: 12px 26px;
+        font-size: 17px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        background: linear-gradient(135deg, #ff758c, #ff7eb3);
+        color: white;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+        transition: 0.3s ease;
+        display: block;
+        width: 100%;
+    }
+
+    .feedback-btn:hover {
+        transform: scale(1.06);
+    }
+
+    @keyframes popIn {
+        0% { transform: scale(0); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes bounce {
+        0%,100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+    }
+
+    .confetti {
+        position: fixed;
+        top: -10px;
+        font-size: 24px;
+        animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(110vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<!--  Background Music -->
+<audio id="bgMusic" loop>
+    <source src="darkhast.mp3" type="audio/mpeg">
+</audio>
+    
+<div class="bg"></div>
+<div class="overlay"></div>
+
+<div class="wrapper">
+    <div class="card">
+        <h1>🎉 Happy Birthday 🎉</h1>
+        <div class="emoji">🎂🧸💖</div>
+        <h2>KANU</h2>
+
+        <p>
+            Main chahta hu tum hardam khush raho,<br>
+            Hamesha hasti khelti raho, 💕<br>
+            Kisi bhi halat me main sath hu tumhare. ✨
+        </p>
+
+        <!-- Feedback popup button -->
+        <button class="feedback-btn" onclick="askFeedback()">
+            💌👈🏻
+        </button>
+
+        <!-- Instagram reply button -->
+        <button class="feedback-btn" onclick="openInstaDM()">
+            📸 Insta pe reply bhejo(Jada accha laga to call bhi kar sakti ho 👉🏻👈🏻🫣)
+        </button>
+    </div>
+</div>
+
+<script>
+
+/* Start music on first click */
+document.body.addEventListener("click", () => {
+    const music = document.getElementById("bgMusic");
+    music.volume = 0.4; 
+    music.play();
+}, { once: true });
+
+/* Simple feedback popup */
+function askFeedback() {
+    alert("💖 bohot accha laga na??😊\nPlease mujhe batana… kaisa laga??");
+}
+
+function openInstaDM() {
+    const message = encodeURIComponent(
+        "Mujhe tumhara birthday page bahut acha laga 💖"
+    );
+
+    const instaLink =
+        "https://www.instagram.com/direct/t/raj._.only/?text=" + message;
+
+    window.open(instaLink, "_blank");
+}
+
+/* Confetti effect(ful patti girane wala effect) */
+function createConfetti() {
+    const confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+
+    const emojis = ["🌷", "🌺", "🌸", "🌻", "🌹", "🪻", "🌼", "🍁", "🪷"];
+    confetti.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+
+    confetti.style.left = Math.random() * window.innerWidth + "px";
+    confetti.style.animationDuration = (Math.random() * 3 + 3) + "s";
+
+    document.body.appendChild(confetti);
+
+    setTimeout(() => confetti.remove(), 6000);
+}
+
+setInterval(createConfetti, 200);
+</script>
+
+</body>
+</html>
+
+
